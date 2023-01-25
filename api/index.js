@@ -53,7 +53,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
-const PORT=8800 || process.env.$PORT
+const PORT=8800 || process.env.PORT
 
 
 app.listen(PORT,(err)=>{
