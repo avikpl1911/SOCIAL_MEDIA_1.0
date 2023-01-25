@@ -19,9 +19,9 @@ export default function Post({post}) {
     
     const likeHandler = async ()=>{
          try {
-            await axios.put("http://localhost:8800/api/posts/"+post._id+"/like",{userId:currentUser._id});
+            await axios.put(process.env.REACT_APP_API_URL+"/posts/"+post._id+"/like",{userId:currentUser._id});
             
-            const res =  await axios.get("http://localhost:8800/api/posts/"+post._id);
+            const res =  await axios.get(process.env.REACT_APP_API_URL+"http://localhost:8800/api/posts/"+post._id);
            
           
             
@@ -47,7 +47,7 @@ export default function Post({post}) {
     useEffect(()=> {
 
         const fetchUser = async()=>{
-          const res =  await axios.get(`http://localhost:8800/api/users?userId=${post.userId}`);
+          const res =  await axios.get(`${process.env.REACT_APP_API_URL}/users?userId=${post.userId}`);
           setUser(res.data);
           
         }

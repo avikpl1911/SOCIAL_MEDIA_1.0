@@ -11,9 +11,9 @@ export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [pre,setPre]= useState(false)
+  
   const [followed, setFollowed] = useState(
-    pre
+    false
   );
 
 
@@ -50,7 +50,7 @@ export default function Rightbar({ user }) {
         const fetchData = async ()=>{try {
   
         
-        const res =await  axios.get("http://localhost:8800/api/users?username="+currentUser.username);
+        const res =await  axios.get(process.env.REACT_APP_API_URL+"/users?username="+currentUser.username);
         setFollowed(res.data.followings.includes(user._id));
   
       } catch (err) {
@@ -72,7 +72,7 @@ export default function Rightbar({ user }) {
       if (typeof user._id !== "undefined"){const getFriends = async () => {
         
         try {
-          const friendList = await axios.get(`http://localhost:8800/api/users/friends/${user._id}`  );
+          const friendList = await axios.get(`${process.env.REACT_APP_API_URL}/users/friends/${user._id}`,{timeout:1000}  );
           setFriends(friendList.data);
         } catch (err) {
           console.log(err);
